@@ -1,1 +1,11 @@
 /* Do everything in this file */
+h2{
+    border-bottom-width: 1px;
+    border-bottom-color: red;
+    border-bottom-style: solid;
+
+}
+.tet{
+    float:right;
+    width: 40%;
+}
