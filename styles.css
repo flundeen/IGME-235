@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+}
+h1 {
+    color:gainsboro;
+}
+h2 {
+    color: gainsboro;
+}
+h4{
+    color: gainsboro;
+}
+p{
+    color: gainsboro;
+}
+hr{
+    border-bottom: 1px white;
+}
+a:link{
+    color: orange;
+}
+a:visited{
+    color: darkblue;
+}
+a:focus{
+    color: coral;
+}
+a:hover{
+    color: coral;
+}
+a:active{
+    color: blue;
+}
