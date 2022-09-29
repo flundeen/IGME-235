@@ -1,11 +1,41 @@
 /* Do everything in this file */
-h2{
-    border-bottom-width: 1px;
-    border-bottom-color: red;
-    border-bottom-style: solid;
 
+figure img{
+    width: 100%;
 }
-.tet{
-    float:right;
-    width: 40%;
+figure{
+    max-width:650px;
+    margin:0 auto;
+}
+header, main, footer{
+    max-width:90vw;
+    margin: 0 auto;
+}
+#tetlist {
+    display: flex;
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+    flex-flow: row wrap;
+}
+
+#tetlist div.tet {
+    flex: 0 0 300px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#tetlist div.tet img{
+    width: 60%;
+}
+
+span.name{
+    display:block;
+    margin: 1.5em 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+div.aliases{
+    text-align: left;
+    margin: 1em;
 }
