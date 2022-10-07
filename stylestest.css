@@ -1,0 +1,36 @@
+div {
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+}
+
+#container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 100px 400px 100px;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-areas: "header header header"
+                         "lsidebar content rsidebar" 
+                         "lsidebar footer rsidebar";
+}
+
+#header {
+grid-area: header;
+}
+
+#left_sidebar {
+grid-area: lsidebar;
+}
+
+#main {
+grid-area: content;
+}
+
+#right_sidebar {
+grid-area: rsidebar;
+}
+
+#footer {
+grid-area: footer;
+}
