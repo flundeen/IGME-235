@@ -1,0 +1,129 @@
+@font-face {
+    font-family: headerFont;
+    src: url(BebasNeue-Regular.ttf);
+}
+@font-face {
+    font-family: otherFont;
+    src: url(RobotoSlab-VariableFont_wght.ttf);
+}
+html{
+    color:rgb(0, 34, 73);
+    margin: 0 auto;
+    max-width: 1200px;
+    min-width: 1200px;
+    min-height: 1800px;
+    padding: 1em;
+    font-family: otherFont;
+}
+header{
+    background-color: rgb(0, 34, 73);
+}
+header h1{
+    font-family: headerFont;
+    
+    
+}
+header h1 #Market {
+    float:left;
+    color: rgb(255, 208, 0);
+    font-size: 8em;
+    z-index: 2;
+}
+header h1 #Money {
+    float: right;
+    color:rgb(0, 184, 240);
+    font-size:7em;
+    position: relative;
+    bottom: 250px;
+    right: 100px;
+    z-index: 0;
+}
+header h1 #and {
+    color:white;
+    font-size: 12em;
+    z-index: 1;
+}
+
+header p{
+    color:white;
+    background-color: rgb(0, 34, 73);
+    font-size: medium;
+    max-width: 550px;
+    position: relative;
+    
+    bottom: 300px;
+}
+#retire{
+    display: float;
+    grid-area: retire;
+
+
+}
+#retire h3{
+    font-size: 3em;
+}
+#retire #p2{
+    color: rgb(0, 184, 240);
+}
+#bluebox{
+    display: float;
+    background-color: rgb(0, 184, 240, 0.8);
+    grid-area: bluebox;
+    
+
+}
+#bluebox h2{
+    color:white;
+    font-size: 5em;
+}
+
+#bluebox h6{
+    color:rgb(0, 34, 73);
+    font-size: medium;
+}
+#bluebox p{
+    color: white;
+    font-size: small;
+}
+
+#bigm {
+    grid-area: bigm;
+
+
+}
+
+#bigm #them{
+    float:left;
+    font-size: 7em;
+    color: rgb(0, 184, 240);
+}
+
+#bigm2 {
+    display: float;
+    grid-area: bigm2;
+
+
+}
+
+img #swimmer{
+
+    z-index: -10;
+    float:left;
+}
+
+main{
+    display:grid;
+    height:100vh;
+    float:right;
+    grid-template-columns: 7fr 3fr 1fr 3fr;
+    grid-template-rows: 6fr 1fr 7fr; 
+    grid-template-areas: ". . retire retire"
+                        "bluebox . retire retire "
+                        "bluebox bigm . bigm2";
+    position:relative;
+    bottom: 600px;
+    right:75px;
+}
+
+
+
