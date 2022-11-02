@@ -84,7 +84,7 @@ function dataLoaded(e){
     //9 - Start building an html string we will display to the user
     let results = obj.data;
     console.log("results.length = " + results.length);
-    let bigString = "<p><i>Here are " + results.length + "results for '" + displayTerm + "'</i></p>";
+    let bigString = "";
 
     //10 - loop through the array of results
     for(let i = 0; i < results.length; i++){
@@ -116,7 +116,7 @@ function dataLoaded(e){
     document.querySelector("#content").innerHTML = bigString;
 
     //17 - update the status
-    document.querySelector("#status").innerHTML = "<b>Success!</b>";
+    document.querySelector("#status").innerHTML = "<b>Success!</b> <p><i>Here are " + results.length + "results for '" + displayTerm + "'</i></p>";
 }
 
 function dataError(e){
