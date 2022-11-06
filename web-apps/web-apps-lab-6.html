@@ -54,10 +54,14 @@ for (const food of foods) {
     lists[1].appendChild(holder);
 }
 
-
+for (const key in links) {
     let holder = document.createElement("li");
-    holder.innerHTML = "<a href = links.>";
-    lists[1].appendChild(holder);
+    holder.innerHTML = "<a href = '" + links[key] + "'>" + key + "</a>";
+    lists[2].appendChild(holder);
+}
+    
+
+
 
 
 
