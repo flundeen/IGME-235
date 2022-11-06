@@ -1,0 +1,47 @@
+@font-face {
+    font-family: otherFont;
+    src: url(src/RobotoSlab-VariableFont_wght.ttf);
+}
+
+html{
+ background-color: rgb(53, 53, 53);
+ font-family: otherFont;
+}
+
+main{
+    background-image: url("dice.jpg");
+    
+    margin: 0 15%;
+    min-width: 400px;
+    max-width: 1000px;
+    min-height: 500px;
+    position: relative;
+    padding: 15px;;
+}
+section{
+    position: absolute;
+    top: 25%;
+    left:18%;
+    right:18%;
+    padding:15px;
+    background-color:rgba(119, 117, 117, 0.829);
+    margin:0 auto;
+    text-align: center;
+}
+
+header{
+    color: darkorange;
+}
+
+h2{
+    font-size: 2em;
+}
+
+p{
+    font-size: 1.5em;
+}
+
+button{
+    color: rgb(53, 53, 53);
+    background-color: darkorange;
+}
