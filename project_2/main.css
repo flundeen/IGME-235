@@ -1,0 +1,28 @@
+html{
+    color: chartreuse;
+    background-color: rgb(99, 99, 99);
+}
+
+hr{
+    color: chartreuse;
+}
+
+#crewresult{
+    display: flex;
+}
+
+header{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 3em;
+}
+
+#inputs{
+    margin: 0 auto;
+}
+
+.charInfo{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    margin: 10px;
+}
