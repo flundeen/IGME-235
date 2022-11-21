@@ -4,30 +4,41 @@ let crewCount = 0;
 let epNum = 0;
 let rick = false;
 
+///Event for when generator button is called
 function searchButtonClicked(){
     console.log("Button Clicked!");
-    const CHAR_URL = "https://rickandmortyapi.com/api/character";
-    const LOC_URL = "https://rickandmortyapi.com/api/location";
-    const EP_URL = "https://rickandmortyapi.com/api/episode";
 
     //pulls values from numboxes in html
     crewCount = document.querySelector("#people").value;
     epNum = document.querySelector("#eptheme").value;
     rick = document.querySelector("#withRick").checked;
 
+    //BASE URLS
+    const EP_URL = "https://rickandmortyapi.com/api/episode/" + epNum;
+    const CHAR_URL = "https://rickandmortyapi.com/api/character";
+    const LOC_URL = "https://rickandmortyapi.com/api/location";
 
     //debug testers
     console.log("User wants " + crewCount + " members for episode " + epNum);
     console.log(rick);
 
-    getChar(CHAR_URL);
 
+    document.querySelector("#crewresult").innerHTML = "";
+
+    //calls data queries from API
+    if(rick){
+        getChar(CHAR_URL + "/1");
+    }
+    for(let i = 0; i < crewCount; i++){
+        getChar(CHAR_URL + "/" + (Math.floor(Math.random() *800)));
+    }
     getEp(EP_URL);
     
-    getLoc(LOC_URL);
+    getLoc(LOC_URL + "/" + (Math.floor(Math.random() *40)));
 
 }
 
+///Retrieves character info from API
 function getChar(url){
     let xhr = new XMLHttpRequest();
 
@@ -39,6 +50,7 @@ function getChar(url){
     xhr.send();
 }
 
+///Retrieves episode data from API
 function getEp(url){
     let xhr = new XMLHttpRequest();
 
@@ -50,6 +62,7 @@ function getEp(url){
     xhr.send();
 }
 
+///Gets location data from API
 function getLoc(url){
     let xhr = new XMLHttpRequest();
 
@@ -61,77 +74,47 @@ function getLoc(url){
     xhr.send();
 }
 
+///Handles character info from API
 function charDataLoaded(e){
-    let xhr = e.target;
 
-    //console.log(xhr.response);
+    let xhr = e.target;
 
     let obj = JSON.parse(xhr.responseText);
 
-    if(!obj.results || obj.results == 0){
-        document.querySelector("#crewresult").innerHTML = "<b> No one wanted to join you </b>";
-    }
-
     let charList = obj.results;
-    console.log("Charlist length: " + charList.length);
-    let bigString = "";
 
-    if(rick){
-        bigString += `<li><div class="charInfo"><img src ="${charList[0].image}" alt="Image of ${charList[0].name}">${charList[0].name} a ${charList[0].species} who was last seen at ${charList[0].location.name}.</div></li>`;
-    }
+    //lays out display of character info
+    let charOutput = `<div class="charInfo"><img src ="${obj.image}" alt="Image of ${obj.name}">${obj.name} a ${obj.species} who was last seen at ${obj.location.name}.</div>`;
 
-    for (let i = 0; i < crewCount; i++) {
-        let result = charList[Math.floor(Math.random() * charList.length)];
-
-        //Console output for character info
-        //console.log(result);
-
-
-        let charOutput = `<li><div class="charInfo"><img src ="${result.image}" alt="Image of ${result.name}">${result.name} a ${result.species} who was last seen at ${result.location.name}.</div></li>`;
-
-        bigString += charOutput;
-    }
-
-    document.querySelector("#crewresult").innerHTML = bigString;
+    //sets character info to character results location
+    document.querySelector("#crewresult").innerHTML += charOutput;
 
 }
 
+///Handles episode name from API
 function epDataLoaded(e){
     let xhr = e.target;
 
-    //console.log(xhr.response);
-
     let obj = JSON.parse(xhr.responseText);
 
-    if(!obj.results || obj.results == 0){
-        document.querySelector("epresult").innerHTML = "<b> an unreleased episode so you'll just have to guess.</b>";
-
-    }
-
-    let episode = obj.results[epNum-1];
-
-    document.querySelector("#epname").innerHTML = `<div class="epInfo">${episode.name}</div>`;
+    //Gives the episode results location the name of desired episode
+    document.querySelector("#epname").innerHTML = `<div class="epInfo">${obj.name}</div>`;
 }
 
+///Handles Location data from API
 function locDataLoaded(e){
     let xhr = e.target;
 
-    //console.log(xhr.response);
-
     let obj = JSON.parse(xhr.responseText);
 
-    if(!obj.results || obj.results == 0){
-        document.querySelector("locresult").innerHTML = "<b> nowhere. Your portal gun isn't working for some reason.</b>";
+    console.log(obj);
 
-    }
-
-    let destination = obj.results[Math.floor(Math.random() * obj.results.length)];
-
-    if(destination.dimension != "unknown"){
-        document.querySelector("#locresult").innerHTML = `<div class="locInfo">${destination.name} in the ${destination.dimension}.</div>`;
-    }
+    //If the dimension of the location is known
+    if(obj.dimension != "unknown"){
+        document.querySelector("#locresult").innerHTML = `<div class="locInfo">${obj.name} in the ${obj.dimension}.</div>`;
+    } //otherwise
     else{
-        document.querySelector("#locresult").innerHTML = `<div class="locInfo">${destination.name} in an unknown dimension.</div>`;
+        document.querySelector("#locresult").innerHTML = `<div class="locInfo">${obj.name} in an unknown dimension.</div>`;
 
     }
     

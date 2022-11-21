@@ -1,14 +1,24 @@
+@font-face {
+    font-family: chewy;
+    src: url(Chewy-Regular.ttf);
+}
 html{
     color: chartreuse;
     background-color: rgb(99, 99, 99);
+    font-family: chewy;
+    margin: 0 5%;
+    font-size: 1.5em;
 }
 
 hr{
-    color: chartreuse;
+    background-color: chartreuse;
+    height: 2px;
+    border:none;
 }
 
 #crewresult{
     display: flex;
+    flex-flow: row wrap;
 }
 
 header{
@@ -19,10 +29,35 @@ header{
 
 #inputs{
     margin: 0 auto;
+    text-align: center;
 }
 
 .charInfo{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
+    flex: 0 0 300px;
     margin: 10px;
 }
+
+button{
+    background-color: chartreuse;
+    font-weight: bolder;
+    font-size: medium;
+}
+
+#locresult, #epname{
+    font-size: 2em;
+    font-style: italic;
+}
+
+input {
+    background-color: chartreuse;
+    font-weight: bolder;
+    font-size: medium;
+}
+
+#withRick{
+    background-color: chartreuse;
+    font-weight: bolder;
+    font-size: medium;
+}
+
+
