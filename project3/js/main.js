@@ -1,9 +1,7 @@
-class piece{
-    constructor(moveset,x,y,name, team){
-        this.moveset = moveset;
-        this.x = x;
-        this.y = y;
-        this.name = name;
-        this.team = team;
+const app = new PIXI.Application(
+    {
+        width: 600,
+        height: 600
     }
-}
+)
+document.body.appendChild(app.view);
