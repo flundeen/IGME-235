@@ -54,8 +54,7 @@ input {
     font-size: medium;
 }
 
-#withRick{
-    background-color: chartreuse;
+.withRick{
     font-weight: bolder;
     font-size: medium;
 }

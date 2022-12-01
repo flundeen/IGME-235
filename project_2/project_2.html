@@ -16,15 +16,15 @@
     
     <div id="inputs">
         How many people are going on this adventure?
-        <input id="people" type="number" size ="5" maxlength="5" value="1" /> <br>
+        <input id="people" type="number" value="1" /> <br>
         Which episode would you like to recreate? 
-        <input id="eptheme" type="number" size ="5" maxlength="5" value="1" />
+        <input id="eptheme" type="number" value="1" />
         <br>
         Do you want Rick to tag along?
-        <input id="withRick" type="radio" name="rickJoin" value="yes">
-        <label for="withRick">Yes</label>
-        <input id="withRick" type="radio" name="rickJoin" value="no" checked="true">
-        <label for="withRick">No</label>
+        <input class="withRick" type="radio" name="rickJoin" value="yes">
+        <label class="withRick">Yes</label>
+        <input class="withRick" type="radio" name="rickJoin" value="no">
+        <label class="withRick">No</label>
         <br>
         <button id="activator">Generate your wacky adventure!</button>
     </div>

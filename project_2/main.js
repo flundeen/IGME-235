@@ -11,7 +11,7 @@ function searchButtonClicked(){
     //pulls values from numboxes in html
     crewCount = document.querySelector("#people").value;
     epNum = document.querySelector("#eptheme").value;
-    rick = document.querySelector("#withRick").checked;
+    rick = document.querySelector(".withRick").checked;
 
     //BASE URLS
     const EP_URL = "https://rickandmortyapi.com/api/episode/" + epNum;

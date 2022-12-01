@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Pixel Arteur</title>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+	<style>
+	span.cell{
+		height:23px;
+		width:23px;
+		border:1px solid purple; /* actual width & height is 25px because of border */
+		background-color: #ccc;
+		padding:0;
+		margin:0;
+		position:absolute;
+	}
+	
+	/* Get rid of the cell border when it is selected */
+	span.cellSelected{
+		height:25px;
+		width:25px;
+		background-color: red;
+		padding:0;
+		margin:0;
+		position:absolute;
+	}
+	
+	#gridContainer{
+		top:5px;
+		left:5px;
+		padding:0;
+		display:inline-block;
+		position:absolute;
+	}
+	
+	#colorChooser{
+		position: absolute;
+		top: 65px;
+		left:800px;
+	}
+	
+	h1{
+		font-family: 'Press Start 2P', cursive;
+		display: inline-block;
+		position:absolute;
+		font-size:1.3em;
+		top: 0;
+		left:800px;
+	}
+
+	span.cell{
+		height:8px;
+		width:8px;
+		border:1px solid purple;
+		background-color: #ccc;
+		padding:0;
+		margin:0;
+		position:absolute;
+	}
+
+	span.cellSelected{
+		height:10px;
+		width:10px;
+		background-color: #ccc;
+		padding:0;
+		margin:0;
+		position:absolute;
+	}
+	
+	</style>
+</head>
+<body>
+<div id="gridContainer"></div>
+<h1>Pixel ArTeur</h1>
+<select id="colorChooser">
+	<option value="aqua">Aqua</option>
+	<option value="Bisque">Bisque</option>
+	<option value="black">Black</option>
+	<option value="blue">Blue</option>
+	<option value="brown">Brown</option>
+	<option value="chocolate">Chocolate</option>
+	<option value="cyan">Cyan</option>
+	<option value="DarkGray">Dark Gray</option>
+	<option value="green">Green</option>
+	<option value="red" selected>Red</option>
+	<option value="magenta">Magenta</option>
+	<option value="orange">Orange</option>
+	<option value="tan">Tan</option>
+	<option value="white">White</option>
+	<option value="wheat">Wheat</option>
+	<option value="WhiteSmoke">WhiteSmoke </option>
+	<option value="yellow">Yellow</option>
+</select>
+
+<script>
+
+// 1
+const numCols = 70;
+const numRows = 40;
+const cellWidth = 10;
+const cellSpacing = 1;
+
+//2
+const container = document.querySelector("#gridContainer");
+
+// 3
+const span = document.createElement('span');
+span.className = 'cell';
+
+//4
+const cells = [];
+
+//5
+for(let row=0;row<numRows;row++){
+    cells.push([]);
+        for (let col=0;col<numCols;col++){
+        let cell = span.cloneNode();
+        cell.style.left = `${col * (cellWidth+cellSpacing)}px`;
+        cell.style.top = `${row * (cellWidth+cellSpacing)}px`;
+        container.appendChild(cell);
+        cells[row][col] = cell;
+    }
+}
+
+//6
+let color = "red";
+
+//7
+container.onclick = fillCell;
+
+//8
+function fillCell(e){
+    let rect = container.getBoundingClientRect();
+    let mouseX = e.clientX - rect.left;
+    let mouseY = e.clientY - rect.top;
+    let columnWidth = cellWidth+cellSpacing;
+    let col = Math.floor(mouseX/columnWidth);
+    let row = Math.floor(mouseY/columnWidth);
+    let selectedCell = cells[row][col];
+    selectedCell.className = 'cellSelected';
+    selectedCell.style.backgroundColor = color;
+    console.log(`${col},${row}`);
+}
+
+//9
+let mouseIsDown = false;
+
+//10
+container.onmousemove = (e) => {
+    e.preventDefault();
+    if(mouseIsDown) fillCell(e);
+};
+
+//11
+container.onmousedown = (e) => {
+    e.preventDefault();
+    mouseIsDown = true;
+};
+
+//12
+container.onmouseup = (e) => {
+    e.preventDefault();
+    mouseIsDown = false;
+};
+
+//13
+document.querySelector("#colorChooser").onchange = (e) => {
+    color = e.target.value;
+}
+
+
+const lifeworld = {
+
+	init(numCols,numRows){
+		this.numCols = numCols;
+		this.numRows = numRows;
+		this.world = this.buildArray();
+		this.worldBuffer = this.buildArray();
+		this.randomSetup();
+	},
+
+	buildArray(){
+		let outerArray = [];
+		for(let row = 0; row<this.numRows; row++){
+			let innerArray = [];
+			for(let col = 0; col < this.numCols; col++){
+				innerArray.push(0);
+			}
+			outerArray.push(innerArray);
+		}
+		return outerArray;
+	},
+
+	randomSetup(){
+		for(let row = 0; row<this.numRows; row++){
+			for(let col = 0; col < this.numCols; col++){
+				this.world[row][col] = 0;
+				if(Math.random() < 0.1){
+					this.world[row][col] = 1;
+				}
+			}
+		}
+	},
+
+	getLivingNeighbors(row,col){
+		if(row < 0 || col < 0 || row >= numRows || col >= numCols) {return 0};
+
+		let neighbornNum = 0;
+		if(this.world[row+1][col+1].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row+1][col].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row+1][col-1].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row][col+1].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row][col-1].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row-1][col+1].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row-1][col].style.backgroundColor == "red") neighbornNum++;
+		if(this.world[row-1][col-1].style.backgroundColor == "red") neighbornNum++;
+
+		return neighbornNum;
+	},
+
+	step(){
+		for(let row = 0; row<this.numRows; row++){
+			for(let col = 0; col < this.numCols; col++){
+					let neighbornNum = 0;
+					neighborNum = getLivingNeighbors(row,col);
+					if(neighborNum < 2 || neighborNum> 3) this.worldBuffer[row][col] = 0;
+					if(neighborNum = 3 && this.world[row][col] == 0) this.worldBuffer[row][col] = 1;
+			}
+		}
+	}
+
+}
+
+//Life Stuff
+
+//1
+let lastUpdate = performance.now();
+
+//2 
+let lastFrame = performance.now();
+
+//3
+let maxFrameDelay = 1000/12;
+
+//4
+lifeworld.init(numCols,numRows);
+
+//5
+loop(performance.now);
+
+//6
+function loop(timestamp){
+	requestAnimationFrame(loop);
+	lastUpdate = timestamp;
+	if(timestamp - lastFrame > maxFrameDelay){
+		lastFrame = timestamp;
+		lifeworld.step();
+		updateGrid();
+	}
+}
+
+//7
+function updateGrid(){
+	for(let row = 0; row<numRows; row++){
+			for(let col = 0; col < numCols; col++){
+				let element = cells[row][col];
+				if(lifeworld.world[row][col] == 1){
+					element.style.backgroundColor = "red";
+				}else{
+					element.style.backgroundColor="white";
+				}
+			}
+		}
+}
+
+
+
+</script>
+</body>
+</html>
